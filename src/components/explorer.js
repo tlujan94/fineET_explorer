@@ -1,5 +1,6 @@
 import React from 'react';
 import L from 'leaflet';
+import { geoLocation } from "../utils/geoLocation";
 
 export class Explorer extends React.Component {
     render() {
@@ -18,5 +19,13 @@ export class Explorer extends React.Component {
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.explorer);
+
+        geoLocation(this.setUserLocation.bind(this));
+    }
+
+    setUserLocation(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.explorer.setView(new L.latLng(lat, lng), 8);
     }
 }

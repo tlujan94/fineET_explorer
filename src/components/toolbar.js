@@ -45,6 +45,9 @@ export class Toolbar extends React.Component {
                 <br/>
                 <br/>
                 <Button color='primary' onClick={this.runQuery.bind(this)}>Query</Button>
+                <br/>
+                <br/>
+                <Button color='success' disabled>Home</Button>
             </div>
         );
     }
