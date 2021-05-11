@@ -72,8 +72,26 @@ export class Toolbar extends React.Component {
     }
 
     runQuery() { // working, but refine
-        const stream = this.querier.getStreamForQuery('fineET_etr','[]');
-        stream.on('data', async (data) => console.log(data)); // not getting data back??
-        stream.on('end', console.log('end'));
+        const q = [{
+            $geoNear: {
+                near: {
+                    type: 'Point',
+                    coordinates: [-105.07, 40.55]
+                },
+                distanceField: 'dist.calculated',
+                maxDistance: 150000
+            }
+        }];
+        const stream = this.querier.getStreamForQuery('fineET_etr',JSON.stringify(q));
+        stream.on('data', async (response) => {
+            const data = JSON.parse(response.array[0])
+            const coordinates = data.geometry.coordinates;
+            const etr = data.properties.etr;
+
+            //console.log(`Coordinates: ${coordinates}, ETR: ${etr}`);
+            const latlng = {lat: coordinates[1], lng: coordinates[0]};
+            this.props.addCircle(latlng, etr);
+        });
+        stream.on('end', async () => console.log('end'));
     }
 }
