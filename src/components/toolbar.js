@@ -71,8 +71,8 @@ export class Toolbar extends React.Component {
         });
     }
 
-    runQuery() {
-        const stream = this.querier.getStreamForQuery('dams_geo','');
+    runQuery() { // working, but refine
+        const stream = this.querier.getStreamForQuery('fineET_etr','[]');
         stream.on('data', async (data) => console.log(data)); // not getting data back??
         stream.on('end', console.log('end'));
     }
