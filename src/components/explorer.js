@@ -19,13 +19,15 @@ export class Explorer extends React.Component {
     // MAKE SURE TO GET USER LOCATION
     componentDidMount() {
         this.explorer = L.map('explorer', {
-           center: [37.8, -96],
-           zoom: 4
+            center: [37.8, -96],
+            zoom: 4,
+            zoomControl: false
         });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.explorer);
+        new L.Control.Zoom({position: 'topright'}).addTo(this.explorer);
 
         geoLocation(this.setUserLocation.bind(this));
     }
