@@ -18,7 +18,6 @@ export class Explorer extends React.Component {
         );
     }
 
-    // MAKE SURE TO GET USER LOCATION
     componentDidMount() {
         this.explorer = L.map('explorer', {
             center: [37.8, -96],
@@ -59,7 +58,7 @@ export class Explorer extends React.Component {
         const geolocation = () => geoLocation(this.setUserLocation.bind(this));
         L.HomeButton = L.Control.extend({
             options: {
-                position: 'bottomleft'
+                position: 'topleft'
             },
             onAdd: function(map) {
                 let button = L.DomUtil.create('button');
@@ -79,7 +78,7 @@ export class Explorer extends React.Component {
     setUserLocation(position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        this.explorer.setView(new L.latLng(lat, lng), 8);
+        this.explorer.setView(new L.latLng(lat, lng), 14);
     }
 
     addCircle(latlng, etr) {
