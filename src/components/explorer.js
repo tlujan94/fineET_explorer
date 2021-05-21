@@ -8,6 +8,8 @@ export class Explorer extends React.Component {
         super(props);
 
         this.addCircle = this.addCircle.bind(this);
+        this.renderSidebarButton = this.renderSidebarButton.bind(this);
+        this.renderHomeButton = this.renderHomeButton.bind(this);
     }
 
     render() {
@@ -28,6 +30,11 @@ export class Explorer extends React.Component {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.explorer);
         new L.Control.Zoom({position: 'topright'}).addTo(this.explorer);
+        this.renderSidebarButton();
+        this.renderHomeButton();
+    }
+
+    renderSidebarButton() {
         const toggleSidebar = this.props.toggleSidebar;
         L.Sidebar = L.Control.extend({
             options: {
@@ -40,13 +47,33 @@ export class Explorer extends React.Component {
                 return button;
             }
         });
+
         L.sidebar = function(options) {
             return new L.Sidebar(options);
         };
 
         L.sidebar().addTo(this.explorer);
+    }
 
-        geoLocation(this.setUserLocation.bind(this));
+    renderHomeButton() {
+        const geolocation = () => geoLocation(this.setUserLocation.bind(this));
+        L.HomeButton = L.Control.extend({
+            options: {
+                position: 'bottomleft'
+            },
+            onAdd: function(map) {
+                let button = L.DomUtil.create('button');
+                button.innerHTML = '\u2302';
+                button.onclick = geolocation;
+                return button;
+            }
+        });
+
+        L.homeButton = function(options) {
+            return new L.HomeButton(options);
+        };
+
+        L.homeButton().addTo(this.explorer);
     }
 
     setUserLocation(position) {
