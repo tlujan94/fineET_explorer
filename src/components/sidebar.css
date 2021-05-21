@@ -1,5 +1,4 @@
 .sidebar {
-    padding: 10px;
     width: 0;
     height: 620px;
     float: left;
@@ -9,6 +8,7 @@
 }
 
 .btn {
+    margin: 10px;
     border-radius: 5px;
     font-size: 12pt;
     background-color: grey;
