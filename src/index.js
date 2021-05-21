@@ -10,19 +10,24 @@ class App extends React.Component {
         super(props);
 
         this.explorer = React.createRef();
+        this.sidebar = React.createRef();
     }
 
     render() {
         return (
             <div>
-                <Sidebar/>
-                <Explorer ref={this.explorer}/>
+                <Sidebar ref={this.sidebar}/>
+                <Explorer ref={this.explorer} toggleSidebar={this.toggleSidebar.bind(this)}/>
             </div>
         );
     }
 
     addCircle(latlng, etr) {
         this.explorer.current.addCircle(latlng, etr);
+    }
+
+    toggleSidebar() {
+        this.sidebar.current.toggleSidebar();
     }
 }
 

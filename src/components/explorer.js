@@ -28,6 +28,23 @@ export class Explorer extends React.Component {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.explorer);
         new L.Control.Zoom({position: 'topright'}).addTo(this.explorer);
+        const toggleSidebar = this.props.toggleSidebar;
+        L.Sidebar = L.Control.extend({
+            options: {
+                position: 'topleft'
+            },
+            onAdd: function(map) {
+                let button = L.DomUtil.create('button');
+                button.innerHTML = '\u2261';
+                button.onclick = toggleSidebar;
+                return button;
+            }
+        });
+        L.sidebar = function(options) {
+            return new L.Sidebar(options);
+        };
+
+        L.sidebar().addTo(this.explorer);
 
         geoLocation(this.setUserLocation.bind(this));
     }
