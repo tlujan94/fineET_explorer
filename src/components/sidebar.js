@@ -1,9 +1,9 @@
 import React from 'react';
-import DatePicker from "react-datepicker";
 import { QuerySelector } from "./sidebar_utils/querySelector";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './sidebar.css';
+import {DateSelector} from "./sidebar_utils/dateSelector";
 
 
 export class Sidebar extends React.Component {
@@ -11,7 +11,6 @@ export class Sidebar extends React.Component {
         super(props);
 
         this.state = {
-            date: new Date('05/20/2020'),
             isOpen: false
         }
         this.sidebar = React.createRef();
@@ -26,13 +25,7 @@ export class Sidebar extends React.Component {
                         <button className='btn' onClick={this.toggleSidebar.bind(this)}>&times;</button>
                     </div>
                 </div>
-                <div className='section-outer'>
-                    <div className='section-inner'>
-                        Date:
-                        <br/>
-                        <DatePicker selected={this.state.date}/>
-                    </div>
-                </div>
+                <DateSelector/>
                 <QuerySelector/>
                 <div className='footer'>
                     <button>submit</button>

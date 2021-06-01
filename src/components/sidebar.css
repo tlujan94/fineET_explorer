@@ -6,6 +6,7 @@
     color: white;
     transition: 0.5s;
     white-space: nowrap;
+    z-index: 0;
 }
 
 .header {
