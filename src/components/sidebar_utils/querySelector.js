@@ -40,6 +40,12 @@ export class QuerySelector extends React.Component {
     renderRadial() {
         return (
             <div style={{padding: '10px'}}>
+                <div style={{display: 'table', width: '100%'}}>
+                    <p style={{display: 'table-cell'}}>Use Current Location:</p>
+                    <div style={{display: 'table-cell', textAlign: 'right'}}>
+                        <input type='checkbox'/>
+                    </div>
+                </div>
                 <div>
                     Center:
                     <div style={{display: 'table', width: '75%', margin: 'auto'}}>
