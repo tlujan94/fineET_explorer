@@ -1,5 +1,6 @@
 import React from 'react';
 import DatePicker from "react-datepicker";
+import { QuerySelector } from "./sidebar_utils/querySelector";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './sidebar.css';
@@ -29,15 +30,13 @@ export class Sidebar extends React.Component {
                     <div className='section-inner'>
                         Date:
                         <br/>
-                        <DatePicker selected={new Date()}/>
+                        <DatePicker selected={this.state.date}/>
                     </div>
                 </div>
-                <div className='section-outer'>
-                    <div className='section-inner'>
-                        Type:
-                    </div>
+                <QuerySelector/>
+                <div className='footer'>
+                    <button>submit</button>
                 </div>
-                <button>submit</button>
             </div>
         );
     }
