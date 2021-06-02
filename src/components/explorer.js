@@ -31,6 +31,9 @@ export class Explorer extends React.Component {
         new L.Control.Zoom({position: 'topright'}).addTo(this.explorer);
         this.renderSidebarButton();
         this.renderHomeButton();
+
+        console.log(this.explorer);
+        this.explorer.on('click', this.onClick.bind(this));
     }
 
     renderSidebarButton() {
@@ -91,5 +94,24 @@ export class Explorer extends React.Component {
         }).on('mouseout', () => {
             circle.closePopup();
         }).addTo(this.explorer);
+    }
+
+    onClick(e) {
+        // check for radial / marker
+        // ...
+
+        // draw circle / marker->polygon
+        if (this.queryCircle) {
+            this.queryCircle.setLatLng(e.latlng);
+        } else {
+            this.queryCircle = new L.circle(e.latlng, {
+               fillOpacity: 0,
+               radius: 500
+            });
+            this.queryCircle.addTo(this.explorer);
+        }
+
+        // update sidebar data
+        this.props.updateRadialCoords(e.latlng);
     }
 }

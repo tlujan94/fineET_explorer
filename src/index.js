@@ -17,7 +17,9 @@ class App extends React.Component {
         return (
             <div>
                 <Sidebar ref={this.sidebar}/>
-                <Explorer ref={this.explorer} toggleSidebar={this.toggleSidebar.bind(this)}/>
+                <Explorer ref={this.explorer}
+                          toggleSidebar={this.toggleSidebar.bind(this)}
+                          updateRadialCoords={this.updateRadialCoords.bind(this)}/>
             </div>
         );
     }
@@ -28,6 +30,10 @@ class App extends React.Component {
 
     toggleSidebar() {
         this.sidebar.current.toggleSidebar();
+    }
+
+    updateRadialCoords(latlng) {
+        this.sidebar.current.updateRadialCoords(latlng);
     }
 }
 

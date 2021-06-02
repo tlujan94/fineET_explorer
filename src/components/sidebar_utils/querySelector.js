@@ -50,11 +50,11 @@ export class QuerySelector extends React.Component {
                     Center:
                     <div style={{display: 'table', width: '75%', margin: 'auto'}}>
                         <p style={{display: 'table-cell'}}>Latitude:</p>
-                        <p style={{display: 'table-cell', textAlign: 'right'}}>0.0000</p>
+                        <p style={{display: 'table-cell', textAlign: 'right'}}>{this.getCoordStr(this.props.radialCoords.lat)}</p>
                     </div>
                     <div style={{display: 'table', width: '75%', margin: 'auto'}}>
                         <p style={{display: 'table-cell'}}>Longitude:</p>
-                        <p style={{display: 'table-cell', textAlign: 'right'}}>0.0000</p>
+                        <p style={{display: 'table-cell', textAlign: 'right'}}>{this.getCoordStr(this.props.radialCoords.lng)}</p>
                     </div>
                 </div>
                 <div>
@@ -68,5 +68,13 @@ export class QuerySelector extends React.Component {
                 </div>
             </div>
         );
+    }
+
+
+    getCoordStr(value) {
+        if (value === null)
+            return 'NaN';
+        else
+            return value.toFixed(4);
     }
 }

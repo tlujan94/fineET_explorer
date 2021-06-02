@@ -11,9 +11,11 @@ export class Sidebar extends React.Component {
         super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: false,
+            radialCoords: {lat: null, lng: null}
         }
         this.sidebar = React.createRef();
+        this.updateRadialCoords = this.updateRadialCoords.bind(this);
     }
 
     render() {
@@ -26,9 +28,9 @@ export class Sidebar extends React.Component {
                     </div>
                 </div>
                 <DateSelector/>
-                <QuerySelector/>
+                <QuerySelector radialCoords={this.state.radialCoords}/>
                 <div className='footer'>
-                    <button>submit</button>
+                    <button disabled={true}>submit</button>
                 </div>
             </div>
         );
@@ -40,6 +42,12 @@ export class Sidebar extends React.Component {
         this.sidebar.current.style.width = width;
         this.setState({
             isOpen: toggle
+        });
+    }
+
+    updateRadialCoords(latlng) {
+        this.setState({
+           radialCoords: latlng
         });
     }
 }
